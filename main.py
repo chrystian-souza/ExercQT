@@ -9,5 +9,5 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 principal = MainWindow()
 principal.show()
-app.exec()llll
+app.exec()
 
