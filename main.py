@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QMainWindow, QApplication, QLabel, QLineEdit, QPushButton, QVBoxLayout
+from PySide6.QtWidgets import QMainWindow, QApplication, QLabel, QLineEdit, QPushButton, QVBoxLayout, QFrame
 
 
 class MainWindow(QMainWindow):
@@ -21,6 +21,19 @@ class MainWindow(QMainWindow):
         self.btn_calcular = QPushButton('Calcular')
 
         layout = QVBoxLayout()
+        layout.addWidget(self.lbl_altura)
+        layout.addWidget(self.txt_altura)
+        layout.addWidget(self.lbl_largura)
+        layout.addWidget(self.txt_largura)
+        layout.addWidget(self.lbl_profundidade)
+        layout.addWidget(self.txt_profundidade)
+        layout.addWidget(self.lbl_resultade)
+        layout.addWidget(self.btn_calcular)
+
+        container = QFrame()
+        container.setLayout(layout)
+
+        self.setCentralWidget(container)
 
 
 app = QApplication(sys.argv)
