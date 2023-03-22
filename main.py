@@ -17,7 +17,7 @@ class MainWindow(QMainWindow):
         self.lbl_profundidade = QLabel('Prufundidade')
         self.txt_profundidade = QLineEdit()
 
-        self.lbl_resultade = QLabel()
+        self.lbl_resultado = QLabel()
         self.btn_calcular = QPushButton('Calcular')
 
         layout = QVBoxLayout()
@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.txt_largura)
         layout.addWidget(self.lbl_profundidade)
         layout.addWidget(self.txt_profundidade)
-        layout.addWidget(self.lbl_resultade)
+        layout.addWidget(self.lbl_resultado)
         layout.addWidget(self.btn_calcular)
 
         container = QFrame()
@@ -35,9 +35,20 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(container)
 
+        self.btn_calcular.clicked.connect(self.calcular_metro_cubico)
+
+        # Largura * Altura * Profundidade
+
+    def calcular_metro_cubico(self):
+        resultado = str(
+            float(self.txt_largura.text()) *
+            float(self.txt_altura.text()) *
+            float(self.txt_profundidade.text())
+        )
+        self.lbl_resultado.setText(f'O volume cúbico é: {resultado}')
+
 
 app = QApplication(sys.argv)
 principal = MainWindow()
 principal.show()
 app.exec()
-
