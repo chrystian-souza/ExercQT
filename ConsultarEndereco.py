@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
 
         if response.status_code == 200:
             endereco = response.json()
-            self.lbl_logradouro.setText(f"Rua {endereco['logradouro']}")
+            self.lbl_logradouro.setText(f"Rua {endereco[' logradouro']}")
             self.lbl_bairro.setText(f"Bairro {endereco['bairro']}")
             self.lbl_municipio.setText(f"Municipio {endereco['localidade']}")
             self.lbl_uf.setText(f"Estado {endereco['uf']}")
