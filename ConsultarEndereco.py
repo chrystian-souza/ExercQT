@@ -1,4 +1,5 @@
 import sys
+import requests
 
 from PySide6.QtWidgets import *
 
@@ -44,6 +45,33 @@ class MainWindow(QMainWindow):
         self.layout.addWidget(self.lbl_bairro, 2, 0)
         self.layout.addWidget(self.lbl_municipio, 3, 0)
         self.layout.addWidget(self.lbl_uf, 4, 0)
+
+        # Acões nos botões
+        self.btn_consulta.clicked.connect(self.consultar_cep)
+        self.btn_limpar.clicked.connect(self.limpar_conteudo)
+
+    def consultar_cep(self):
+        cep = self.txt_cep.text()
+        url = f'https://viacep.com.br/ws/{cep}/json/'
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            endereco = response.json()
+            self.lbl_logradouro.setText(f"Rua {endereco['logradouro']}")
+            self.lbl_bairro.setText(f"Bairro {endereco['bairro']}")
+            self.lbl_municipio.setText(f"Municipio {endereco['localidade']}")
+            self.lbl_uf.setText(f"Estado {endereco['uf']}")
+        else:
+            msg = QMessageBox()
+            msg.setInformativeText('Cep inválido ou não encontrado')
+            msg.exec()
+
+    def limpar_conteudo(self):
+        self.lbl_logradouro.setText('')
+        self.lbl_bairro.setText('')
+        self.lbl_municipio.setText('')
+        self.lbl_uf.setText('')
+        self.txt_cep.setText('')
 
 
 app = QApplication(sys.argv)
